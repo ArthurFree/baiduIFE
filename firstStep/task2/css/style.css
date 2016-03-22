@@ -1,0 +1,134 @@
+body{
+		margin: 0;
+		padding: 0;
+		font-size: 14px;
+		font-family: Georgia, serif, sans-serif;
+		background-color: #dedede;
+	}
+	header{
+		width: 100%;
+		height: 60px;
+		background-color: #333;
+	}
+	header img{
+		width: 114px;
+		height: 48px;
+		margin-left: 36px;
+		margin-top: 10px;
+	}
+	nav{
+		float: right;
+		margin-right: 30px;
+		margin-top: 10px; 
+	}
+	ul{
+		list-style-type: none;
+	}
+	nav ul li{
+		float: left;
+		margin-left: 15px; 
+		color: #fff;
+		cursor: pointer;
+	}
+	.content{
+		width: 90%;
+		height: 4350px;
+		font-size: 16px;
+		line-height: 1.5em;
+		margin: 0 auto;
+	}
+	article, aside{
+		margin-top: 20px;
+		padding: 20px; 
+		background-color: #fff;
+		box-shadow: 2px 2px 2px #aaa;
+	}
+	p{
+		text-indent: 2em;
+	}
+	h3{
+		color: #888;
+		text-indent: 0;
+	}
+	h2{
+		font-weight: bold; 
+		text-indent: 0;
+	}
+	div span{
+		color: #888;
+		font-size: 12px;
+		text-indent: 0;
+		margin-left: 0;
+	}
+	figure{
+		width: 180px;
+		height: 190px;
+		text-indent: 0;
+		text-align: center;
+		border: 1px solid #888;
+		margin-top: 10px;
+	}
+	figure img{
+		width: 150px;
+		height: 150px;
+	}
+	table{
+		width: 100%;
+		padding: 0;
+		border-collapse: collapse; 
+		text-align: left;
+		font-size: 14px;
+		line-height: 1.5em;
+	}
+	th{
+		background-color: #333;
+		color: #fff;
+	}
+	tfoot{
+		background-color: #ccc;
+		font-weight: bold;
+	}
+	aside{
+		margin-bottom: 20px;
+	}
+	aside h2{
+		border-left: 3px solid #999;
+		padding: 6px;
+	}
+	form{
+		padding-left: 200px;
+		font-size: 14px;
+		line-height: 2em;
+	}
+	form div{
+		margin-left: 32%;
+	}
+	label{
+		display: inline-block;
+		width: 30%;
+		text-align: right;
+		vertical-align: top;
+		margin-right: 10px;
+	}
+	input{
+		margin-right: 10px;
+	}
+	.submit{
+		width: 79%;
+		height: 40px;
+		padding: 0;
+		margin: 0 auto;
+		font-weight: bold;
+		cursor: pointer;
+		color: #fff;
+		background-color: rgb(28, 99, 221);
+	}
+	footer{
+		width: 100%;
+		height: 60px;
+		line-height: 4em;
+		background-color: #000;
+		text-align: center;
+		color: #fff;
+		margin-bottom: 0;
+	}
