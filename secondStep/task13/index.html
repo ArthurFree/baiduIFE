@@ -20,35 +20,18 @@
   在事件处理函数中
   获取aqi-input输入的值，并显示在aqi-display中
   */
+
+  var inputInfo = document.getElementById("aqi-input");
   var button = document.getElementById("button");
-  var input = document.getElementById("aqi-input");
-  var display = document.getElementById("aqi-display");
-  button.onclick = function(){
-    value = input.value;
-    if(value){
-      display.innerHTML = value;
-    }else{
-      alert("kong");
+  var infoShow = document.getElementById("aqi-display");
+  button.onclick = function() {
+    if(inputInfo.value == ""){
+      infoShow.innerHTML = "尚无录入";
+    } else {
+      infoShow.innerHTML = inputInfo.value;
     }
   }
 
-
-  // 看到的另外一种写法，记录下:
-
-  // var dom = {
-  //   btn: document.getElementById('button'),
-  //   aqi: document.getElementById('aqi-input'),
-  //   label: document.getElementById('aqi-display')
-  // };
-  // dom.btn.onclick = function(){
-  //   var val = dom.aqi.value;
-  //   if(val.length > 0){
-  //     dom.label.innerHTML = val;
-  //   }else{
-  //     alert('请输入北京今天空气质量！')
-  //   }
-  
-  }
 })();
 
 </script>
