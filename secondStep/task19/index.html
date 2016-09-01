@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task 19</title>
+	<style type="text/css">
+		.show {
+			position: absolute;
+			top: 60px;
+			width: 90%;
+			height: 600px;
+		}
+
+		.showBar {
+			position: absolute;
+			bottom: 0;
+			width: 10px;
+			background-color: red;
+		}
+
+
+	</style>
+</head>
+<body>
+	<div class="wrap">
+		<label>请输入数字:</label>
+		<input id="print-in" type="text" />
+		<button class="button">左侧入</button>
+		<button class="button">右侧入</button>
+		<button class="button">左侧出</button>
+		<button class="button">右侧出</button>
+		<label style="margin-left: 20px;">请输入随机数个数:</label>
+		<input id="random" type="text" name="random" />
+		<label style="margin-left: 20px;">是否清空当前队列:</label>
+		<input class="radio" type="radio" name="isEmpty" value="是" checked="checked" /><span>是</span>
+		<input class="radio" type="radio" name="isEmpty" value="否" /><span>否</span>
+		<button class="button">随机</button>
+		<button class="button">冒泡</button>
+		<div class="show"></div>
+	</div>
+	<script type="text/javascript">
+		var arr = [];
+
+		function init() {
+			bind();
+		}
+		
+		//事件绑定
+		function bind() {
+			var input = document.getElementById("print-in");
+			var random = document.getElementById("random");
+			var button = document.getElementsByClassName("button");
+
+			//循环为button元素绑定事件
+			for(var i = 0;i < button.length;i++) {
+				button[i].onclick = (function(i) {
+					return function() {
+						
+						if (i < 4) {
+							if (input.value === "" || input.value > 500 || input.value < 1) {
+								return console.log("请输入正确的数值");
+							}
+						}
+						
+						//数组长度不能超过60
+						if (arr.length > 60) return console.log("队列长度不能超过60");
+
+						switch (this.innerText) {
+							case "左侧入":
+								arr.unshift(parseInt(input.value));console.log(arr)
+								display();
+								break;
+							case "右侧入":
+								arr.push(parseInt(input.value));console.log(arr)
+								display();
+								break;
+							case "左侧出":
+								arr.shift();console.log(arr)
+								display();
+								break;
+							case "右侧出":
+								arr.pop();console.log(arr)
+								show();
+								break;
+							case "随机":
+								randomNum(parseInt(random.value));
+								break;
+							case "冒泡":
+								bubbleSort();
+								break;
+							default:
+							break;
+						}
+					}
+				}(i));
+			}
+		}
+
+		// 生成随机数
+		function randomNum(num) {
+			var randomNum = 0;
+			var radio = document.getElementsByClassName("radio");
+			
+			// arr =[]; //在生成随机数前，清空数组
+			if (radio[0].checked === true) {
+				arr = [];
+			}
+
+			// 生成随机数的个数不能超过60
+			if (num > 60 || (num + arr.length) > 60) return console.log("队列长度不能超过60");
+			// 当前生成的随机数个数与当前数组个数相加不能大于60
+			if (num.toString() == "NaN") return console.log("请输入随机数的个数");
+
+			for (var i = 0;i < num;i++) {
+				randomNum = Math.floor(Math.random() * 500);
+				arr.push(randomNum);
+			}
+			display();
+		}
+
+		//渲染条形图显示
+		function display() {
+			var show = document.getElementsByClassName("show")[0];
+			show.innerHTML = "";
+
+			for(var  i = 0;i < arr.length;i++) {
+				var div = document.createElement("div");
+				div.style.height = arr[i] + "px";
+				div.style.left = 10*i + 10*(i + 1) + "px";
+				div.setAttribute("class", "showBar");
+				div.setAttribute("title", "数值为:" + arr[i]);
+
+				//绑定删除事件，点击删除，并从数组中移出数据
+				div.onclick = (function(i) {
+					return function() {
+						arr.splice(i, 1);
+						show.removeChild(div);
+						display();
+					}
+				}(i))
+
+				show.appendChild(div);
+			}
+		}
+
+		function bubbleSort() {
+			var show = document.getElementsByClassName("show")[0];
+			var temp, i, j = 0;
+			
+			/*冒泡排序
+
+			for (var i = 0;i < arr.length - 1;i++) {
+				for (var j = 0;j < arr.length - 1 - i;j++) {
+					if (arr[j] > arr[j + 1]) {
+						temp = arr[j];
+						arr[j] = arr[j + 1];
+						arr[j + 1] = temp;
+
+						show.childNodes[j].style.height = arr[j] + "px";
+						show.childNodes[j + 1].style.height = arr[j + 1] + "px";
+					}
+				}
+			}
+
+			*/
+			
+			// 排序可视化
+			i = arr.length - 1;
+			var timer = setInterval(function(){
+				if (i < 1) {
+					clearInterval(timer);
+					for (var k = 0;k < show.childNodes.length;k++) {
+						show.childNodes[k].setAttribute("title", "数据为:" + arr[k]);
+					}
+				}
+
+				if (i == j) {
+					--i;
+					j = 0;
+				}
+
+				if (arr[j] > arr[j + 1]) {
+					temp = arr[j];
+					arr[j] = arr[j + 1];
+					arr[j + 1] = temp;
+				}
+
+				show.childNodes[j].style.height = arr[j] + "px";
+				show.childNodes[j + 1].style.height = arr[j + 1] + "px";
+
+				++j;
+			}, 50);
+
+		}
+
+		//初始化
+		init();
+	</script>
+</body>
+</html>

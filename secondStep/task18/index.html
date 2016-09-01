@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task18</title>
+	<style type="text/css">
+		#show {
+			width: 100%;
+			height: 100px;
+		}
+
+		.num {
+			background-color: red;
+			color: white;
+			display: inline-block;
+			width: 50px;
+			height: 50px;
+			font-size: bold;
+			text-align: center;
+			line-height: 50px;
+			margin-left: 10px;
+		}
+	</style>
+</head>
+<body>
+	<input id="number" type="text" name="text" />
+	<button onclick="changeData('left-in')">左侧入</button>
+	<button onclick="changeData('right-in')">右侧入</button>
+	<button onclick="changeData('left-out')">左侧出</button>
+	<button onclick="changeData('right-out')">右侧出</button>
+	<div id="show"></div>
+	<script type="text/javascript">
+		
+		var arr = [];
+
+		function changeData(data) {
+
+			var out; // 暂存移出数据
+			var show = document.getElementById("show");
+			var inputData = document.getElementById("number");
+
+			show.innerHTML = "";
+
+			//判断输入框是否为空
+			if (inputData.value === "") return;
+
+			//判断哪个按钮被点击
+			switch (data) {
+				case 'left-in':
+				arr.unshift(inputData.value);              // 左入
+				break;
+				case 'left-out':
+				out = arr.shift();                         // 左出
+				console.log(out);
+				break;
+				case 'right-in':
+				printin = arr.push(inputData.value);       // 右入
+				break;
+				case 'right-out':
+				out = arr.pop();                           // 右出
+				console.log(out);
+				break;
+			}
+
+			// 渲染到页面
+			for (var i = 0;i < arr.length;i++) {
+				// show.innerHTML += "<div class='num'>" + arr[i] + "</div>";
+				var div = document.createElement("div");
+				div.setAttribute("class", "num");
+				div.innerHTML = arr[i];
+				show.appendChild(div);
+
+				div.onclick = (function(i) {
+					return function(e) {
+						arr.splice(i, 1);
+						show.removeChild(this);
+						changeData();
+					}
+				}(i));
+			}
+			
+		}
+
+
+	</script>
+</body>
+</html>
