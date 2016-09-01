@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task 20</title>
+	<style type="text/css">
+		#show {
+			border: 1px solid #000;
+			height:200px;
+			margin-top: 50px;
+			padding: 20px;
+		}
+
+		.active {
+			display: inline-block;
+			width: 30px;
+			height: 30px;
+			background: rgb(0, 140, 214);
+			border-radius: 30px;
+			color: white;
+			margin-left: 5px;
+			text-align: center;
+			line-height: 30px;
+			padding: 5px;
+ 		}
+
+ 		.select {
+ 			color: red;
+ 		}
+	</style>
+</head>
+<body>
+	<div id="main">
+		<label>请输入内容：</label>
+		<textarea cols="20" rows="6"></textarea>
+		<input id="insert" type="button" name="insert" value="插入" />
+		<input id="clear" type="button" name="clear" value="清空" />
+		<input id="searchText" type="text" name="searchText" />
+		<input id="search" type="button" name="search" value="搜索" />
+		<div id="show"></div>
+	</div>
+	<script type="text/javascript">
+		(function() {
+			var insert = document.getElementById("insert");
+			var show = document.getElementById("show");
+			var clear = document.getElementById("clear");
+			var search = document.getElementById("search");
+			var sText = document.getElementById("searchText");
+			var strArr = [];
+
+			insert.onclick = function() {
+				var text = document.getElementsByTagName("textarea")[0].value.trim();
+				if(text == "") return;
+
+				strArr = strArr.concat(text.split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/));
+				for(var i = 0;i < strArr.length;i++){
+					if (strArr[i] == "") {
+						strArr.splice(i ,1);
+					}
+				}
+				console.log(strArr)
+				render();
+			}
+
+			clear.onclick = function() {
+				strArr = [];
+				show.innerHTML = "";
+			}
+
+			search.onclick = function() {
+				var searchText = sText.value.trim();
+				if (searchText == "") return;
+
+				show.innerHTML = strArr.map(function(d) {
+					if (searchText != null && searchText.length > 0) {
+						d = d.replace(new RegExp(searchText, "g"), "<span class='select'>" + searchText + "</span>");
+					}
+
+					return "<div class='active'>" + d + "</div>";
+				}).join("");
+			}
+
+			function render() {
+				if (strArr.length == 0) return;
+				show.innerHTML = "";
+				for(var i = 0;i < strArr.length;i++){
+					var div = document.createElement("div");
+					div.setAttribute("class", "active");
+					div.innerText = strArr[i];
+					show.appendChild(div);
+				}
+			}
+		})();
+	</script>
+</body>
+</html>
