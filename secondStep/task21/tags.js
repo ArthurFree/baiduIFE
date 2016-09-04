@@ -74,6 +74,27 @@ function render(item) {
 	var div = document.createElement("div");
 	div.setAttribute("class", "tag");
 	div.innerText = item;
+	// 鼠标划入时，改变样式
+	addEventHandler(div, 'mouseover', function() {
+		div.style.backgroundColor = "red";
+		div.innerText = "删除" + item;
+	});
+	// 鼠标划出时，恢复样式
+	addEventHandler(div, 'mouseout', function() {
+		div.style.backgroundColor = 'rgb(0, 140, 214)';
+		div.innerText = item;
+	});
+	// 鼠标点击时，删除节点，并删除数组与对象中存储的数据
+	addEventHandler(div, 'click', function(event) {
+		console.log(event.target);
+		tag_show.removeChild(event.target);
+		for(var i = 0;i< arr.length;i++) {
+			if (arr[i] === item) {
+				arr.splice(i, 1);
+				delete hash[arr[i]];
+			}
+		}
+	});
 	tag_show.appendChild(div);
 }
 
