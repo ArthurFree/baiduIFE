@@ -108,4 +108,3 @@ function init() {
 
 init();
 
->>>>>>> corporation

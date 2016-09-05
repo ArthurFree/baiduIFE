@@ -165,4 +165,3 @@ console.log(this);
 
 	return tags;
 });
->>>>>>> corporation

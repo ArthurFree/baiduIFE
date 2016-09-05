@@ -30,5 +30,4 @@
 	function init() {
 		bind();
 	}
->>>>>>> corporation
 });
