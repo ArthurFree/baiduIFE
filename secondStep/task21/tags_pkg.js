@@ -14,7 +14,7 @@
 			type: "single",		// 类型选择 单项触发 或者 多项触发
 			Ielem: null,		// 输入DOM元素
 			Oelem: null,		// 输出DOM元素
-			confrimBtn: null	// 插入按钮元素
+			confirmBtn: null	// 插入按钮元素
 		}
 
 		for(var key in _config) {
@@ -35,7 +35,7 @@
 			// 	showTag.call(this, config);
 			// });
 		} else if (config.type === "multiple") {
-			addEventHandler();
+			addEventHandler(config.confirmBtn, 'click', showTag.bind(config.Ielem, config));
 		}
 	}
 
@@ -71,6 +71,30 @@
 
 			}
 
+		} else if (config.type === "multiple") {
+
+			data = this.value.trim().split(/[^0-9a-zA-Z\u4e00-\u9fa5]+/);
+
+			if (data.length > 10 && arr.length < 10) {
+				data = data.slice(0, 10);
+			}
+
+			for(var i = 0;i < data.length;i++) {
+				// 去重
+				if (!hash[data[i]] && data[i] !== "") {
+					
+					hash[data[i]] = true;
+					arr.push(data[i].trim());
+
+					if (arr.length > 10) {
+						delete hash[arr[0]];
+						arr.shift();
+						config.Oelem.removeChild(config.Oelem.firstChild);
+					}
+					// 渲染
+					render(arr[arr.length-1], config);
+				}
+			}
 		}
 
 	}
