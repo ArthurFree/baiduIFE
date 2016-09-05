@@ -60,6 +60,7 @@ function showTag() {
 
 }
 	/*
+	 * 渲染页面
 	 * .tag { 
 	 * 		display: inline-block; 
 	 * 		width: 50px; 
@@ -87,13 +88,15 @@ function render(item) {
 	// 鼠标点击时，删除节点，并删除数组与对象中存储的数据
 	addEventHandler(div, 'click', function(event) {
 		console.log(event.target);
-		tag_show.removeChild(event.target);
+		
 		for(var i = 0;i< arr.length;i++) {
 			if (arr[i] === item) {
-				arr.splice(i, 1);
 				delete hash[arr[i]];
+				arr.splice(i, 1);
 			}
 		}
+
+		tag_show.removeChild(event.target);
 	});
 	tag_show.appendChild(div);
 }
