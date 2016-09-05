@@ -1,4 +1,21 @@
-(function(window) {
+/**
+ *
+ *
+ *	使用方法：
+ *
+ *		var tag = new window.lc.tags({
+ *			type: 'single',
+ *			Ielem: document.getElementById("inElem"),
+ *			Oelem: document.getElementById("outElem"),
+ *			confirmBtn: document.getElementById("insert"),
+ *		});
+ *
+ *		tag.init();
+ * 
+ * 
+ */
+
+!(function(window) {
 
 	'use strict';
 
@@ -143,19 +160,3 @@
 
 
 
-/**
- *
- *
- *	使用方法：
- *
- *		var tag = new window.lc.tags({
- *			type: 'single',
- *			Ielem: document.getElementById("inElem"),
- *			Oelem: document.getElementById("outElem"),
- *			confirmBtn: document.getElementById("insert"),
- *		});
- *
- *		tag.init();
- * 
- * 
- */
