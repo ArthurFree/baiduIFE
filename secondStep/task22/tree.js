@@ -63,6 +63,8 @@ TreeWalker.prototype.animation = function() {
 	var timer;
 
 	self.stack = [];
+
+	//self.isWalking 锁定动画，动画播放过程，防止再次触发动画
 	if (!self.isWalking) {
 		self.isWalking = true;
 		stack[iter].style.backgroundColor = "#F125C2";
