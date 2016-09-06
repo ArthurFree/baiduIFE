@@ -8,21 +8,15 @@
 function addHandler(element, type, handler) {
 	if (element.addEventListener) {
 		addHandler = function(element, type, handler) {
-			addHandler = function(element, type, false) {
-				element.addEventListener(type, handler, false);
-			}
+			element.addEventListener(type, handler, false);
 		}
 	} else if (element.attachEvent) {
 		addHandler = function(element, type, handler) {
-			addHandler = function(element, type, handler) {
-				element.attachEvent("on"+type, handler);
-			}
+			element.attachEvent("on"+type, handler);
 		}
 	} else {
 		addHandler = function(element, type, handler) {
-			addHandler = function(element, type, handler) {
-				element["on" + type] = handler;
-			}
+			element["on" + type] = handler;
 		}
 	}
 
@@ -30,3 +24,16 @@ function addHandler(element, type, handler) {
 }
 
 
+function preventDefault(event) {
+	if (event.preventDefault) {
+		preventDefault = function(event) {
+			event.preventDefault;
+		}
+	} else {
+		preventDefault = function(event) {
+			event.returnValue = false;
+		}
+	}
+
+	return preventDefault(event);
+}

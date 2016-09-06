@@ -1,19 +1,3 @@
-<<<<<<< HEAD
-var gulp = require('gulp');
-var browserSync = require('browser-sync').create();
-var reload = browserSync.reload();
-
-
-gulp.task('serve', function() {
-	
-	browserSync.init({
-		server: {
-			baseDir: "./"
-		}
-	});
-
-	gulp.watch("*.html").on("change", reload);
-=======
 var gulp        = require('gulp');
 var browserSync = require('browser-sync').create();
 var reload      = browserSync.reload;
@@ -31,5 +15,4 @@ gulp.task('serve', function () {
     });
 
     gulp.watch(["*/*/*.html", "*/*/*.css", "*/*/*.js"]).on("change", reload);
->>>>>>> corporation
 });
