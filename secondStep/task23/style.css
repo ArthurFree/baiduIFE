@@ -16,19 +16,19 @@
 }
 
 .root {
-	width: 1200px;
+	width: 1300px;
 	height: 240px;
 	margin-top: 100px;
 	margin-left: 100px;
 }
 
 .child_1 {
-	width: 400px;
+	width: 500px;
 	height: 200px;
 }
 
 .child_2 {
-	width: 150px;
+	width: 200px;
 	height: 160px;
 }
 
@@ -40,4 +40,8 @@
 .child_4 {
 	width: 40px;
 	height: 80px;
+}
+
+input[name=searchBtn] {
+	padding: 5px;
 }

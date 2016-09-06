@@ -5,6 +5,11 @@
 
 	btns[0].addEventListener("click", function() {
 		treeWalker.preOrder(root);
+		treeWalker.animation();
+	}, false);
+
+	btns[3].addEventListener("click", function() {
+		treeWalker.search(root);
 	}, false);
 
 })();
@@ -34,8 +39,33 @@ TreeWalker.prototype.postOrder = function(node) {
 	this.stack.push(node);
 }
 
+TreeWalker.prototype.search = function(node) {
+	this.preOrder(node);
+	console.log(this.stack);
+}
+
 TreeWalker.prototype.animation = function() {
 	var timer;
+	var iter = 0;
+	var stack = this.stack;
+	var self = this;
+	var speeder = document.querySelector("#speeder");
 
-	timer = setInterval(function(), 1000)
+	self.stack = [];
+
+	if (!self.isWalking) {
+		self.isWalking = true;
+		stack[iter].style.backgroundColor = "#F125C2";
+		timer = setInterval(function(){
+			if (iter == stack.length-1) {
+				stack[iter].style.backgroundColor = "#FFFFFF";
+				self.isWalking = false;
+				clearInterval(timer);
+			} else {
+				++iter;
+				stack[iter-1].style.backgroundColor = "#FFFFFF";
+				stack[iter].style.backgroundColor = "#F125C2";
+			}
+		}, speeder.value);
+	}
 }
