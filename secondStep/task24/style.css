@@ -6,6 +6,15 @@
 	box-sizing: border-box;
 }
 
+.m-Pos {
+	margin: 10px 0 0 20px;
+	width: 500px;
+}
+
+.control {
+	margin-right: 0;
+}
+
 .m-all {
 	display: flex;
 	flex-direction: row;
@@ -45,3 +54,4 @@
 input[name=searchBtn] {
 	padding: 5px;
 }
+
