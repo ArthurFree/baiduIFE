@@ -6,6 +6,7 @@
 	var preBtn = btns[0];                                   // 前序遍历按钮
 	var postBtn = btns[1];                                  // 后序遍历按钮
 	var searchBtn = btns[3];                                // 搜索按钮
+	var deleteBtn = btns[4];                                // 删除按钮
 
 	// 绑定前序程序按钮
 	addHandler(preBtn, 'click', function() {
@@ -31,21 +32,26 @@
 		addHandler(event.target, 'click', function(event) {
 
 			// 判断是否为第一次点击, 否——恢复上一个元素的border, 是——直接改变当前元素的border
-			if (elemTemp !== undefined) {
-				elemTemp.style.border = "1px solid rgb(50, 180, 250)";
+			if (treeWalker.currElem !== undefined) {
+				treeWalker.currElem.style.border = "1px solid rgb(50, 180, 250)";
 			}
 
-			// 将当前元素DOM对象暂存在elemTemp
-			elemTemp = event.target;
+			// 将当前元素DOM对象暂存在currElem
+			treeWalker.currElem = event.target;
 			event.target.style.border = "1px solid black";
 
 		});
 
 	});
 
+	addHandler(deleteBtn, 'click', function() {
+		treeWalker.deleteNode();
+	});
+
 })();
 function TreeWalker() {
-	this.stack = [];
+	this.stack = [];                 // 按遍历顺序存放的元素栈
+	this.currElem;                   // 当前选中元素
 	this.isWalking = false;
 	this.isSearching = false;
 }
@@ -186,6 +192,12 @@ TreeWalker.prototype.animation = function() {
 		}, speeder.value);
 
 	}
+}
+
+TreeWalker.prototype.deleteNode = function() {
+	if (this.currElem == undefined) return alert("请选中想要删除的节点");
+	
+	this.currElem.parentNode.removeChild(this.currElem);
 }
 
 /* 事件绑定 */
