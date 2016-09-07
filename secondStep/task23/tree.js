@@ -2,15 +2,23 @@
 	var treeWalker = new TreeWalker();
 	var root = document.querySelector(".root");
 	var btns = document.querySelectorAll("input");
+	var preBtn = btns[0];
+	var postBtn = btns[1];
+	var searchBtn = btns[3];
 
-	btns[0].addEventListener("click", function() {
+	addHandler(preBtn, 'click', function() {
 		treeWalker.preOrder(root);
 		treeWalker.animation();
-	}, false);
+	});
 
-	btns[3].addEventListener("click", function() {
+	addHandler(postBtn, 'click', function() {
+		treeWalker.postOrder(root);
+		treeWalker.animation();
+	});
+
+	addHandler(searchBtn, 'click', function() {
 		treeWalker.search(root);
-	}, false);
+	});
 
 })();
 function TreeWalker() {
@@ -34,7 +42,7 @@ TreeWalker.prototype.postOrder = function(node) {
 	var tempNode = node.firstElementChild || null;
 
 	while(tempNode) {
-		this.postNode(tempNode);
+		this.postOrder(tempNode);
 		tempNode = tempNode.nextElementSibling;
 	}
 
@@ -42,6 +50,12 @@ TreeWalker.prototype.postOrder = function(node) {
 }
 
 TreeWalker.prototype.search = function(node) {
+	if (document.querySelector("input[name=search]").value.trim() == "") return alert("请输入查询内容!!!");
+	var m_all = document.querySelectorAll(".m-all");
+
+	for(var i = 0;i < m_all.length;i++) {
+		m_all[i].style.backgroundColor = "#FFFFFF";
+	}
 	this.isSearching = true;
 	this.preOrder(node);
 	this.animation();
@@ -50,13 +64,13 @@ TreeWalker.prototype.search = function(node) {
 TreeWalker.prototype.animation = function() {
 	var timer;
 	var iter = 0;
+	var count = 0;
 	var stack = this.stack;
 	var self = this;
 	var keyword = document.querySelector("input[name=search]").value.trim().toLocaleLowerCase();
 	var speeder = document.querySelector("#speeder");
 
 	self.stack = [];
-	self.searchArr = [];
 
 	if (!self.isWalking) {
 		self.isWalking = true;
@@ -68,8 +82,14 @@ TreeWalker.prototype.animation = function() {
 
 					if (stack[iter].firstChild.nodeValue.trim().toLocaleLowerCase() == keyword) {
 						stack[iter].style.backgroundColor = "red";
+						count++;
 					} else {
 						stack[iter].style.backgroundColor = "#FFFFFF";
+						if (count == 0) {
+							alert("未找到匹配元素!!!");
+						} else {
+							alert("找到" + count + "个匹配元素");
+						}
 					}
 
 					self.isWalking = false;
@@ -86,6 +106,7 @@ TreeWalker.prototype.animation = function() {
 
 					if (stack[iter].firstChild.nodeValue.trim().toLocaleLowerCase() == keyword) {
 						stack[iter].style.backgroundColor = "red";
+						count++;
 					} else {
 						stack[iter].style.backgroundColor = "rgb(50, 180, 250)";
 					}
