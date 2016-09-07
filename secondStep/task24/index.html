@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task24</title>
+	<link rel="stylesheet" type="text/css" href="style.css" />
+</head>
+<body>
+	<!-- 树结构 -->
+	<div class="root m-all">
+		<div class="m-all child_1">A
+			<div class="m-all child_2">B
+				<div class="m-all child_3">C</div>
+				<div class="m-all child_3">D</div>
+				<div class="m-all child_3">E</div>
+				<div class="m-all child_3">F</div>
+			</div>
+			<div class="m-all child_2">G</div>
+			<div class="m-all child_2">H
+				<div class="m-all child_3">I</div>
+				<div class="m-all child_3">J</div>
+			</div>
+		</div>
+		<div class="m-all child_1">K
+			<div class="m-all child_2">L
+				<div class="m-all child_3">M</div>
+				<div class="m-all child_3">N</div>
+				<div class="m-all child_3">O</div>
+			</div>
+			<div class="m-all child_2">P
+				<div class="m-all child_3">Q
+					<div class="m-all child_4">R</div>
+				</div>
+				<div class="m-all child_3">S</div>
+			</div>
+		</div>
+		<div class="m-all child_1">T</div>
+	</div>
+	<!-- 前/后 序 按钮 -->
+	<input type="button" name="pre" value="前序" />
+	<input type="button" name="post" value="后序" />
+	<!-- 变速器 -->
+	<select id="speeder">
+		<option value="100">快</option>
+		<option value="300">中</option>
+		<option value="500">慢</option>
+	</select>
+	<!-- 搜索部分 -->
+	<label>search: </label>
+	<input type="text" name="search" />
+	<input type="button" name="searchBtn" value="search" />
+	<span>(不区分大小写)</span>
+	<script type="text/javascript" src="tree.js"></script>
+</body>
+</html>

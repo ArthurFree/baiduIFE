@@ -1,0 +1,47 @@
+* {
+	margin: 0;
+	padding: 0;
+	-webkit-box-sizing: border-box;
+	-moz-box-sizing: border-box;
+	box-sizing: border-box;
+}
+
+.m-all {
+	display: flex;
+	flex-direction: row;
+	border: 1px solid rgb(50, 180, 250);
+	margin: 5px;
+	padding: 15px 10px;
+	background-color: #FFFFFF;
+}
+
+.root {
+	width: 1300px;
+	height: 240px;
+	margin-top: 100px;
+	margin-left: 100px;
+}
+
+.child_1 {
+	width: 500px;
+	height: 200px;
+}
+
+.child_2 {
+	width: 200px;
+	height: 160px;
+}
+
+.child_3 {
+	width: 70px;
+	height: 120px;
+}
+
+.child_4 {
+	width: 40px;
+	height: 80px;
+}
+
+input[name=searchBtn] {
+	padding: 5px;
+}
