@@ -7,6 +7,8 @@
 	var postBtn = btns[1];                                  // 后序遍历按钮
 	var searchBtn = btns[3];                                // 搜索按钮
 	var deleteBtn = btns[4];                                // 删除按钮
+	var addText = btns[5]                                   // 添加节点输入框
+	var addBtn = btns[6];                                   // 添加节点按钮
 
 	// 绑定前序程序按钮
 	addHandler(preBtn, 'click', function() {
@@ -26,7 +28,7 @@
 	});
 
 	// 当鼠标点击时，改变当前元素border, 并恢复上一个点击过的元素border
-	addHandler(document, 'mouseover', function(event) {
+	addHandler(root, 'mouseover', function(event) {
 
 		// 对鼠标滑过的元素绑定click事件
 		addHandler(event.target, 'click', function(event) {
@@ -44,8 +46,18 @@
 
 	});
 
+	// 绑定删除节点事件
 	addHandler(deleteBtn, 'click', function() {
 		treeWalker.deleteNode();
+	});
+
+	// 绑定添加节点事件
+	addHandler(addBtn, 'click', function() {
+		var text = addText.value;
+		var div = document.createElement("div");
+		var className = treeWalker.currElem.getAttribute("class");
+		div.setAttribute("class", className);
+		treeWalker.addNode(div, treeWalker.currElem, text);
 	});
 
 })();
@@ -109,8 +121,9 @@ TreeWalker.prototype.search = function(node) {
 }
 
 /**
+ * 
  * 动画渲染
- * @return {[type]} [description]
+ * 
  */
 TreeWalker.prototype.animation = function() {
 	var timer;
@@ -194,13 +207,42 @@ TreeWalker.prototype.animation = function() {
 	}
 }
 
+/**
+ * 
+ * 删除节点
+ * 
+ */
 TreeWalker.prototype.deleteNode = function() {
 	if (this.currElem == undefined) return alert("请选中想要删除的节点");
 	
 	this.currElem.parentNode.removeChild(this.currElem);
 }
 
+/**
+ *
+ * 添加节点
+ * 
+ */
+/**
+ * 添加节点
+ * @param {[DOM Object]} newElem    [待添加节点]
+ * @param {[DOM Object]} targetElem [当前节点]
+ * @param {[String]} value      [带添加节点的内容]
+ */
+TreeWalker.prototype.addNode = function(newElem, targetElem, value) {
+	if (value == "") return alert("请输入想要插入的节点!!!");
+	newElem.innerText = value;
+	insertAfter(newElem, targetElem);
+}
+
 /* 事件绑定 */
+/**
+ * 通用事件绑定函数
+ * @param {[DOM Object]} element [事件绑定元素]
+ * @param {[String]}     type    [事件类型]
+ * @param {[Function]}   handler [事件执行函数]
+ * @return {[Function]}  addHandler(element, type, handler)   [事件执行后结果]
+ */
 function addHandler(element, type, handler) {
 	if (element.addEventListener) {
 		addHandler = function(element, type, handler) {
@@ -218,3 +260,31 @@ function addHandler(element, type, handler) {
 
 	return addHandler(element, type, handler);
 }
+
+/**
+ * 在当前元素后插入新节点
+ * @param  {[DOM Object]} newElem    [带插入节点]
+ * @param  {[DOM Object]} targetElem [当前选中节点]
+ * @return {[null]}            [null]
+ */
+function insertAfter(newElem, targetElem) {
+	var parent = targetElem.parentNode;
+
+	if (parent.lastChild == targetElem) {
+		parent.appendChild(newElem);
+	} else {
+		parent.insertBefore(newElem, targetElem.nextElementSibling);
+	}
+}
+
+
+/**
+ * 在获取元素的过程中，
+ * firstChild在主流浏览器中均会将相邻的html标签中的空白节点也解析出来，在IE6/7/8中则不会解析出空白节点
+ * childNodes同上
+ *
+ * DOM扩展了firstElementChild方法，可以实现选择元素节点，但IE6/7/8中无此方法
+ *
+ * 可以使用children方法（推荐），可以实现firstElementChild的功能，同时兼容IE6/7/8
+ * 
+ */

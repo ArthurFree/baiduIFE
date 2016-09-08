@@ -6,12 +6,17 @@
 	box-sizing: border-box;
 }
 
+body {
+	width: 100%;
+}
+
 .m-Pos {
 	margin: 10px 0 0 20px;
 	width: 500px;
 }
 
 .control {
+	display: inline-block;
 	margin-right: 0;
 }
 
@@ -25,29 +30,34 @@
 }
 
 .root {
-	width: 1300px;
+	/*width: 1300px;*/
+	width: auto;
 	height: 240px;
 	margin-top: 100px;
 	margin-left: 100px;
 }
 
 .child_1 {
-	width: 500px;
+	/*width: 500px;*/
+	width: auto;
 	height: 200px;
 }
 
 .child_2 {
-	width: 200px;
+	/*width: 200px;*/
+	width: auto;
 	height: 160px;
 }
 
 .child_3 {
-	width: 70px;
+	/*width: 70px;*/
+	width: auto;
 	height: 120px;
 }
 
 .child_4 {
-	width: 40px;
+	/*width: 40px;*/
+	width: auto;
 	height: 80px;
 }
 
