@@ -1,0 +1,24 @@
+.main {
+	width: auto;
+	height: 800px;
+	border: 1px solid #000;
+}
+
+.node_parent {
+	width: auto;
+	height: auto;
+	border: 1px solid #000;
+}
+
+.header_node {
+	border: 1px solid #000;
+	cursor: pointer;
+}
+
+.actived {
+	display: block;
+}
+
+.hidden {
+	display: none;
+}
