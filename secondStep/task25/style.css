@@ -4,13 +4,16 @@
 	border: 1px solid #000;
 }
 
-.node_parent {
-	width: auto;
-	height: auto;
+/*.outside_node {
+	width: 200px;
+	height: 50px;
+	padding: 10px; 
 	border: 1px solid #000;
-}
+}*/
 
 .header_node {
+	width: 150px;
+	height: 40px;
 	border: 1px solid #000;
 	cursor: pointer;
 }

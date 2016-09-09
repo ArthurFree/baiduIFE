@@ -10,7 +10,7 @@ function TreeNode(config) {
  * 初始化函数
  * @return {[type]} [description]
  */
-TreeNode.prototype.init = function() {
+TreeNode.prototype.init = function () {
 	var initNode = this.initNode;
 	var tempArr = [];
 	// 判断初始树结构是否为空
@@ -67,7 +67,7 @@ TreeNode.prototype.init = function() {
 }
 
 
-TreeNode.prototype.addNode = function(targetNode, id, text, isRoot) {
+TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 	// 最外层节点
 	var outside_node = document.createElement("div");
 	// 节点中的文字内容
@@ -89,7 +89,7 @@ TreeNode.prototype.addNode = function(targetNode, id, text, isRoot) {
 
 // 此种DOM构建方法感觉不是很好
 // 另外的一种构建的想法是 父节点下只包含两个节点，一个作为title展示，另一个保存所有的Child节点
-TreeNode.prototype.toggleFold = function(elem) {
+TreeNode.prototype.toggleFold = function (elem) {
 	var children = elem.children;
 	
 	for(var i = 1;i < children.length;i++) {
@@ -106,11 +106,11 @@ TreeNode.prototype.toggleFold = function(elem) {
 // 当点击某一节点时，
 function bind(container, toggleFold) {
 	var headers = document.querySelectorAll(".header_node");
-	addHandler(container, 'mouseover', function(event) {
+	addHandler(container, 'mouseover', function (event) {
 		// debugger;
 		var parent = event.target.parentNode;
 		if (parent.children.length > 1) {
-			addHandler(event.target, 'click', function() {
+			addHandler(event.target, 'click', function (event) {
 				if (event.target.className == "header_node") {
 					toggleFold(event.target.parentNode);
 				} else {
@@ -160,15 +160,15 @@ function bind(container, toggleFold) {
 
 function addHandler(element, type, handler) {
 	if (element.addEventListener) {
-		addHandler = function(element, type, handler) {
+		addHandler = function (element, type, handler) {
 			element.addEventListener(type, handler, false);
 		}
 	} else if (element.attachEvent) {
-		addHandler = function(element, type, handler) {
-			element.attachEvent("on" +type, handler ) ;
+		addHandler = function (element, type, handler) {
+			element.attachEvent("on" +type, handler );
 		}
 	} else {
-		addHandler = function(element, type, handler) {
+		addHandler = function (element, type, handler) {
 			element["on" + type] = handler;
 		}
 	}
@@ -176,7 +176,7 @@ function addHandler(element, type, handler) {
 	return addHandler(element, type, handler);
 }
 
-(function() {
+(function () {
 	/**
 	 * data structure
 	 * 初始化节点结构
