@@ -101,17 +101,25 @@ TreeNode.prototype.toggleFold = function (elem) {
 	}
 }
 
-
+// mouseenter -- 在鼠标从元素外部首次移动到元素范围之内时触发
+// 
+// mouseover -- 在鼠标位于一个元素外部，首次移入另一个元素的边界之内时触发
+// 
+// mousemove -- 在鼠标在元素内移动时重复地触发
 
 // 当点击某一节点时，
 function bind(container, toggleFold) {
 	var headers = document.querySelectorAll(".header_node");
-	addHandler(container, 'mouseover', function (event) {
-		// debugger;
+	var count = 0; // 测试click事件执行了多少次
+	addHandler(container, 'mouseenter', function (event) {
+		console.log(event.currentTarget);
 		var parent = event.target.parentNode;
 		if (parent.children.length > 1) {
 			addHandler(event.target, 'click', function (event) {
 				if (event.target.className == "header_node") {
+					++count;
+					console.log(count);
+					console.log(event.target);
 					toggleFold(event.target.parentNode);
 				} else {
 					return;
