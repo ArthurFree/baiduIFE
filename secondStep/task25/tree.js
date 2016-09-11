@@ -127,9 +127,6 @@ function bind(container, toggleFold) {
 
 	function toggle(event) {
 		if (event.target.className == "header_node") {
-			++count;
-			console.log(count);
-			console.log(event.target);
 			toggleFold(event.target.parentNode);
 		} else {
 			return;
