@@ -114,25 +114,27 @@ function bind(container, toggleFold) {
 	addHandler(container, 'mouseenter', function (event) {
 		var parent = event.target.parentNode;
 		if (parent.children.length > 1) {
-			addHandler(event.target, 'click', function toggle(event) {
-				if (event.target.className == "header_node") {
-					++count;
-					console.log(count);
-					console.log(event.target);
-					toggleFold(event.target.parentNode);
-				} else {
-					return;
-				}
-			});
+			addHandler(event.target, 'click', toggle);
 		}
 	});
 
-	addHandler(container, 'mouseout', function (event) {
+	addHandler(container, 'mouseleave', function (event) {
 		var parent = event.target.parentNode;
 		if (parent.children.length > 1) {
 			removeHandler(event.target, 'click', toggle);
 		}
 	});
+
+	function toggle(event) {
+		if (event.target.className == "header_node") {
+			++count;
+			console.log(count);
+			console.log(event.target);
+			toggleFold(event.target.parentNode);
+		} else {
+			return;
+		}
+	}
 }
 
 /**
