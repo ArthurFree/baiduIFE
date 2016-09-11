@@ -112,10 +112,9 @@ function bind(container, toggleFold) {
 	var headers = document.querySelectorAll(".header_node");
 	var count = 0; // 测试click事件执行了多少次
 	addHandler(container, 'mouseenter', function (event) {
-		console.log(event.currentTarget);
 		var parent = event.target.parentNode;
 		if (parent.children.length > 1) {
-			addHandler(event.target, 'click', function (event) {
+			addHandler(event.target, 'click', function toggle(event) {
 				if (event.target.className == "header_node") {
 					++count;
 					console.log(count);
@@ -125,6 +124,13 @@ function bind(container, toggleFold) {
 					return;
 				}
 			});
+		}
+	});
+
+	addHandler(container, 'mouseout', function (event) {
+		var parent = event.target.parentNode;
+		if (parent.children.length > 1) {
+			removeHandler(event.target, 'click', toggle);
 		}
 	});
 }
@@ -182,6 +188,24 @@ function addHandler(element, type, handler) {
 	}
 
 	return addHandler(element, type, handler);
+}
+
+function removeHandler(element, type, handler) {
+	if (element.removeEventListener) {
+		removeHandler = function (element, type, handler) {
+			element.removeEventListener(type, handler, false);
+		}
+	} else if (element.detachEvent) {
+		removeHandler = function (element, type, handler) {
+			element.detachEvent("on" + type, handler);
+		}
+	} else {
+		removeHandler = function (element, type, handler) {
+			element["on" + type] = handler;
+		}
+	}
+
+	return removeHandler(element, type, handler);
 }
 
 (function () {
