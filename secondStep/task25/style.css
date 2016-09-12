@@ -3,20 +3,7 @@
 	width: 800px;
 	height: 800px;
 	border: 1px solid #000;
-}
-
-/*.outside_node {
-	width: 200px;
-	height: 50px;
-	padding: 10px; 
-	border: 1px solid #000;
-}*/
-
-.header_node {
-	width: 150px;
-	height: 40px;
-	border: 1px solid #000;
-	cursor: pointer;
+	background: rgb(247, 247, 247);
 }
 
 .actived {
@@ -25,4 +12,62 @@
 
 .hidden {
 	display: none;
+}
+
+.outside_node {
+	margin-left: 0;
+}
+
+.header_node {
+	width: 200px;
+	height: 40px;
+	border: 1px solid rgb(229, 229, 229);
+	color: rgb(65, 131, 196);
+	font-weight: bold;
+	text-align: center;
+	line-height: 40px;
+	cursor: pointer;
+}
+
+.header_arrow_right::before {
+	content: "";
+	width: 0;
+	height: 0;
+	display: inline-block;
+	border-left: 10px solid rgb(150, 150, 150);
+	border-top: 5px solid transparent;
+	border-bottom: 5px solid transparent;
+	float: left;
+	margin-left: 20px;
+	margin-top: 15px;
+}
+
+.header_arrow_down::before {
+	content: "";
+	width: 0;
+	height: 0;
+	display: inline-block;
+	border-top: 10px solid rgb(150, 150, 150);
+	border-left: 5px solid transparent;
+	border-right: 5px solid transparent;
+	float: left;
+	margin-left: 20px;
+	margin-top: 15px;
+}
+
+.addBtn, .delBtn {
+	height: 15px;
+	width: 15px;
+	margin-top: 0;
+	display: inline-block;
+}
+
+.addBtn {
+	background: url(./plus.png) no-repeat;
+	background-size: 100% 100%;
+}
+
+.delBtn {
+	background: url(./cross.png) no-repeat;
+	background-size: 100% 100%;
 }

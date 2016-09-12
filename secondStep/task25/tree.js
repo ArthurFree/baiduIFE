@@ -68,10 +68,15 @@ TreeNode.prototype.init = function () {
 
 
 TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
-	// 最外层节点
-	var outside_node = document.createElement("div");
-	// 节点中的文字内容
-	var header_node = document.createElement("div");
+	
+	var outside_node = document.createElement("div");      // 最外层节点
+	var header_node = document.createElement("div");       // 节点中的文字内容
+	var addBtn = document.createElement("span");           // 添加节点button
+	var delBtn = document.createElement("span");           // 删除节点按钮
+
+	addBtn.className = "addBtn";
+	delBtn.className = "delBtn";
+
 	// 添加节点属性
 	outside_node.setAttribute("id", id);
 	if (isRoot) {
@@ -80,23 +85,41 @@ TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 		outside_node.setAttribute("class", "outside_node hidden");
 	}
 	
-	header_node.setAttribute("class", "header_node");
-	header_node.innerText = text;
+	header_node.setAttribute("class", "header_node header_arrow_right");
+	header_node.innerHTML = text;
+
+	// addBtn.innerText = "+";
+	// delBtn.innerText = "X";
+
+	header_node.appendChild(addBtn);
+	header_node.appendChild(delBtn);
 
 	outside_node.appendChild(header_node);
 	targetNode.appendChild(outside_node);
 }
 
+TreeNode.prototype.deleteNode = function (node) {
+	node.parentNode.removeChild(node);
+}
+
 // 此种DOM构建方法感觉不是很好
 // 另外的一种构建的想法是 父节点下只包含两个节点，一个作为title展示，另一个保存所有的Child节点
 TreeNode.prototype.toggleFold = function (elem) {
+	// var indent = elem.style.marginLeft == "" ? 0 : parseInt(elem.style.marginLeft);
 	var children = elem.children;
+
+	if (children[0].className.indexOf("header_arrow_right") > -1) {
+		children[0].className = "header_node header_arrow_down";
+	} else {
+		children[0].className = "header_node header_arrow_right";
+	}
 	
 	for(var i = 1;i < children.length;i++) {
 		if (children[i].className == "outside_node active") {
 			children[i].className = "outside_node hidden";
 		} else {
 			children[i].className = "outside_node active";
+			children[i].style.marginLeft = 20 + "px";
 		}
 	}
 }
@@ -109,10 +132,11 @@ TreeNode.prototype.toggleFold = function (elem) {
 
 // 当点击某一节点时，
 function bind(container, toggleFold) {
-	var headers = document.querySelectorAll(".header_node");
+	// var headers = document.querySelectorAll(".header_node");
 	var count = 0; // 测试click事件执行了多少次
 	addHandler(container, 'mouseenter', function (event) {
 		var parent = event.target.parentNode;
+
 		if (parent.children.length > 1) {
 			addHandler(event.target, 'click', toggle);
 		}
@@ -126,7 +150,7 @@ function bind(container, toggleFold) {
 	});
 
 	function toggle(event) {
-		if (event.target.className == "header_node") {
+		if (event.target.className.indexOf("header_node") > -1) {
 			toggleFold(event.target.parentNode);
 		} else {
 			return;
