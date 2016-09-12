@@ -136,7 +136,6 @@ function bind(container, toggleFold) {
 	var count = 0; // 测试click事件执行了多少次
 	addHandler(container, 'mouseenter', function (event) {
 		var parent = event.target.parentNode;
-
 		if (parent.children.length > 1) {
 			addHandler(event.target, 'click', toggle);
 		}

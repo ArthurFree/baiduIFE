@@ -1,3 +1,10 @@
+body {
+	-webkit-user-select: none;
+	-moz-user-select: none;
+	-ms-user-select: none;
+	user-select: none;
+}
+
 .main {
 	margin: 50px;
 	width: 800px;
@@ -24,7 +31,7 @@
 	border: 1px solid rgb(229, 229, 229);
 	color: rgb(65, 131, 196);
 	font-weight: bold;
-	text-align: center;
+	text-align: left;
 	line-height: 40px;
 	cursor: pointer;
 }
@@ -38,8 +45,7 @@
 	border-top: 5px solid transparent;
 	border-bottom: 5px solid transparent;
 	float: left;
-	margin-left: 20px;
-	margin-top: 15px;
+	margin: 15px 10px 0 20px;
 }
 
 .header_arrow_down::before {
@@ -51,14 +57,18 @@
 	border-left: 5px solid transparent;
 	border-right: 5px solid transparent;
 	float: left;
-	margin-left: 20px;
-	margin-top: 15px;
+	margin: 15px 10px 0 20px;
 }
 
 .addBtn, .delBtn {
 	height: 15px;
 	width: 15px;
-	margin-top: 0;
+	margin: 0 0 0 10px;
+	/*display: inline-block;*/
+	display: none;
+}
+
+.header-node:hover>.addBtn, .header-node:hover>.delBtn {
 	display: inline-block;
 }
 
