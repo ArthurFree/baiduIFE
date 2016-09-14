@@ -69,6 +69,7 @@ TreeNode.prototype.init = function () {
 
 TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 	
+	var _this = this;
 	var outside_node = document.createElement("div");      // 最外层节点
 	var header_node = document.createElement("div");       // 节点中的文字内容
 	var addBtn = document.createElement("span");           // 添加节点button
@@ -93,6 +94,30 @@ TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 
 	header_node.appendChild(addBtn);
 	header_node.appendChild(delBtn);
+
+	addHandler(header_node, 'mouseenter', function () {
+		addBtn.style.display = "inline-block";
+		delBtn.style.display = "inline-block";
+	});
+
+	addHandler(header_node, 'mouseleave', function () {
+		addBtn.style.display = "none";
+		delBtn.style.display = "none";
+	});
+
+	addHandler(addBtn, 'click', function (event) {
+		var parent = event.target.parentNode.parentNode;
+		var children = parent.children;
+
+		if (children[1]) {
+			var id = children[1].id + "_" + children.length;
+		} else {
+			var id = parent.id + "_1";
+		}
+		var create_text = prompt("请输入节点内容: ", "hello, 前端");
+		_this.addNode(parent, id, create_text, false);
+		_this.toggleFold(parent);
+	});
 
 	outside_node.appendChild(header_node);
 	targetNode.appendChild(outside_node);
