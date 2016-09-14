@@ -119,6 +119,13 @@ TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 		_this.toggleFold(parent);
 	});
 
+	addHandler(delBtn, 'click', function (event) {
+		var parent = event.target.parentNode.parentNode.parentNode;
+		var children = event.target.parentNode.parentNode;
+
+		parent.removeChild(children);
+	});
+
 	outside_node.appendChild(header_node);
 	targetNode.appendChild(outside_node);
 }
