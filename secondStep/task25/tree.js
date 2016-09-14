@@ -48,7 +48,7 @@ TreeNode.prototype.init = function () {
 		// 遍历存储栈，再次判断未插入节点的父节点是否存在
 		// 存在 —— 将节点添加到父节点后
 		// 不存在 —— 输出提示信息
-		for(var j = 0;j < tempArr.length;j++) {
+		for(var j = tempArr.length-1;j > 0;j--) {
 			var tempParentNode = document.getElementById(tempArr[j].parent);
 			if (tempParentNode) {
 				// var temp_div = document.createElement("div");
