@@ -121,6 +121,11 @@ TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 		var parent = event.target.parentNode.parentNode;
 		var children = parent.children;
 
+		if (parent.children[0].className.indexOf("header_arrow_right") < 0) {
+			parent.style.marginLeft = 20 + 'px';
+			parent.children[0].className = "header_node header_arrow_right";
+		}
+
 		if (children[1]) {
 			var id = children[1].id + "_" + children.length;
 		} else {
