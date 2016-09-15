@@ -177,6 +177,33 @@ TreeNode.prototype.toggleFold = function (elem) {
 	}
 }
 
+TreeNode.prototype.search = function (inElem) {
+	var value = inElem.value.trim();
+	var header_node = document.querySelectorAll(".header_node");
+
+	for(var i = 0;i < header_node.length;i++) {
+		if (header_node[i].innerText.indexOf(value) > -1) {
+			header_node[i].style.background = "rgb(107, 194, 53)";
+			eachParent(header_node[i].parentNode, this.toggleFold);
+		}
+	}
+
+
+	function eachParent(elem, toggle) {
+
+		if (elem 
+			&& elem.id !== "main" 
+			&& elem.className.indexOf("active") < 0) {
+			toggle(elem.parentNode);
+			eachParent(elem.parentNode, toggle);
+		} else {
+			return;
+		}
+	}
+}
+
+
+
 // mouseenter -- 在鼠标从元素外部首次移动到元素范围之内时触发
 // 
 // mouseover -- 在鼠标位于一个元素外部，首次移入另一个元素的边界之内时触发
@@ -323,6 +350,11 @@ function removeHandler(element, type, handler) {
 
 
 	var treeNode = new TreeNode(config);
+	var search = document.querySelector("input[name=search]");
+	var searchBtn = document.getElementById("search");
 
 	treeNode.init();
+	addHandler(searchBtn, 'click', function () {
+		treeNode.search(search);
+	});
 })();
