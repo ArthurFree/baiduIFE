@@ -13,6 +13,7 @@ function TreeNode(config) {
 TreeNode.prototype.init = function () {
 	var initNode = this.initNode;
 	var tempArr = [];
+	var outside_node;
 	// 判断初始树结构是否为空
 	if (initNode == null || initNode.length == 0) return alert("请创建初始节点");
 
@@ -63,6 +64,16 @@ TreeNode.prototype.init = function () {
 		}
 	}
 
+	outside_node = document.querySelectorAll(".outside_node");
+
+	for(var i = 0;i < outside_node.length;i++) {
+		if (outside_node[i].children.length > 1) {
+			outside_node[i].children[0].className = "header_node header_arrow_right";
+		} else {
+			outside_node[i].style.marginLeft = 40 + "px";
+		}
+	}
+
 	bind(this.container, this.toggleFold);
 }
 
@@ -86,7 +97,8 @@ TreeNode.prototype.addNode = function (targetNode, id, text, isRoot) {
 		outside_node.setAttribute("class", "outside_node hidden");
 	}
 	
-	header_node.setAttribute("class", "header_node header_arrow_right");
+	// header_node.setAttribute("class", "header_node header_arrow_right");
+	header_node.setAttribute("class", "header_node");
 	header_node.innerHTML = text;
 
 	// addBtn.innerText = "+";
@@ -142,7 +154,7 @@ TreeNode.prototype.toggleFold = function (elem) {
 
 	if (children[0].className.indexOf("header_arrow_right") > -1) {
 		children[0].className = "header_node header_arrow_down";
-	} else {
+	} else if (children[0].className.indexOf("header_arrow_down") > -1) {
 		children[0].className = "header_node header_arrow_right";
 	}
 	
@@ -151,7 +163,11 @@ TreeNode.prototype.toggleFold = function (elem) {
 			children[i].className = "outside_node hidden";
 		} else {
 			children[i].className = "outside_node active";
-			children[i].style.marginLeft = 20 + "px";
+			if (children[i].children.length > 1) {
+				children[i].style.marginLeft = 20 + "px";
+			} else {
+				children[i].style.marginLeft = 40 + "px";
+			}
 		}
 	}
 }
