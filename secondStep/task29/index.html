@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>task 29</title>
+	<style type="text/css">
+		input { outline: none; }
+		input[name=enter] { width: 200px; height: 30px; }
+		input[name=verifiy] { width: 50px; height: 30px; background: rgb(0, 140, 214); color: white; }
+		.prom { color: rgb(200, 200, 200);margin-top: 10px; }
+		.prom_warn { color: rgb(222, 73, 73);margin-top: 10px; }
+		.prom_pass { color: rgb(45, 179, 45);margin-top: 10px; }
+	</style>
+</head>
+<body>
+	<input type="text" name="enter" />
+	<input type="button" name="verifiy" value="验证" />
+	<div id="prom" class="prom">必填，长度为4~16个字符</div>
+</body>
+<script type="text/javascript">
+	(function () {
+		var enter = document.querySelector("input[name=enter]");
+		var verifiy = document.querySelector("input[name=verifiy]");
+		var prom = document.querySelector("#prom");
+
+		verifiy.onclick = function (event) {
+			event.preventDefault();
+
+			if (enter.value.trim() == "") {
+				prom.innerText = "姓名不能为空";
+				prom.setAttribute("class", "prom_warn");
+				enter.style.border = "2px solid rgb(222, 73, 73)";
+			} else if (enter.value.trim().length >4 ) {
+
+			}else {
+				prom.innerText = "名称格式正确";
+				prom.setAttribute("class", "prom_pass");
+				enter.style.border = "2px solid rgb(45, 179, 45)";
+			}
+		}
+	})()
+</script>
+</html>
