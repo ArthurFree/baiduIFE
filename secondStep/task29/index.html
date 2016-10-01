@@ -38,6 +38,19 @@
 				enter.style.border = "2px solid rgb(45, 179, 45)";
 			}
 		}
+
+		function countLength(str) {
+			var inputLength = 0;
+			for (var i = 0;i < str.length;i++) {
+				var count = str.charCodeAt(i);
+				if (countCode >= 0 && countCode <= 128) {
+					inputLength += 1;
+				} else {
+					inputLength += 2;
+				}
+			}
+			return inputLength;
+		}
 	})()
 </script>
 </html>
