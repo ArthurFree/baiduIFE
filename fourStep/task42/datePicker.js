@@ -27,6 +27,7 @@ dateTimePicker.prototype.getFirstDay = function (date) {
 
 //渲染数据
 dateTimePicker.prototype.renderData = function (date) {
+	this.table.querySelector("tbody").innerHTML = "";
 	var temp_date = new Date(date);
 	var firstDayWeek = this.getFirstDay(date);
 	var tr_total = Math.ceil((this.m_days[this.date.getMonth()] + firstDayWeek)/7);
@@ -50,6 +51,12 @@ dateTimePicker.prototype.createTemplate = function () {
 	var tbody = document.createElement("tbody");
 	var tfoot = document.createElement("tfoot");
 
+	thead.innerHTML = '<tr>'+
+					      '<th colspan="2" class="leftArrow">' + '<--' +'</th>' +
+					      '<th colspan="3" class="showDate">' + this.date.getFullYear() + '年' + (this.date.getMonth()+1) + '月' + '</th>' +
+					      '<th colspan="2" class="rightArrow">' + '-->' +'</th>' +
+				      '</tr>'
+
 	this.table.appendChild(thead);
 	this.table.appendChild(tbody);
 	this.table.appendChild(tfoot);
@@ -57,15 +64,49 @@ dateTimePicker.prototype.createTemplate = function () {
 	this.container.appendChild(this.table);
 }
 
+//上一个月
+dateTimePicker.prototype.preMonth = function () {
+	var showDate= document.querySelector(".showDate");
+	this.date.setMonth(this.date.getMonth() - 1);
+	showDate.innerText = this.date.getFullYear() + '年' + (this.date.getMonth() + 1) + '月';
+	this.renderData(this.date);
+}
+
+//下一个月
+dateTimePicker.prototype.nextMonth = function () {
+	var showDate= document.querySelector(".showDate");
+	this.date.setMonth(this.date.getMonth() + 1);
+	showDate.innerText = this.date.getFullYear() + '年' + (this.date.getMonth() + 1) + '月';
+	this.renderData(this.date);
+}
+
 //初始化函数
 dateTimePicker.prototype.init = function () {
-	 
+	 var that = this;
 
 	this.createTemplate();
 
 	this.renderData(this.date);
 
 	this.container.appendChild(this.table);
+
+
+
+	function bind() {
+		var leftArrow = document.querySelector(".leftArrow");
+		var rightArrow = document.querySelector(".rightArrow");
+
+		leftArrow.addEventListener('click', function () {
+			that.preMonth();
+		}, false);
+
+		rightArrow.addEventListener('click', function () {
+			that.nextMonth();
+		}, false);
+
+	}
+
+	bind();
 }
 
 

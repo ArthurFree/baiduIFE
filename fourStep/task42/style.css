@@ -1,4 +1,22 @@
+table {
+	-webkit-user-select: none;
+}
+
 td {
 	padding: 10px;
 	text-align: center;
+}
+
+.leftArrow {
+	box-sizing: content-box;
+	padding-left: 10px;
+	text-align: left;
+	cursor: pointer;
+}
+
+.rightArrow {
+	box-sizing: content-box;
+	padding-right: 10px;
+	text-align: right;
+	cursor: pointer;
 }
